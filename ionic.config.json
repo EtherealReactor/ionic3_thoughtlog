@@ -1,0 +1,14 @@
+{
+  "name": "project-name",
+  "app_id": "xyz-projectid",
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "http://localhost:10010/"
+    }
+  ],
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

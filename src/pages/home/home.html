@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h2>Welcome to Ionic!</h2>
+  <h2>Welcome to {{userDetails.name}}</h2>
+  <h3>Email: {{userDetails.email}}</h3>
+  <button ion-button color="primary" (click)="logout()">Logout</button>
+   <button ion-button color="primary" (click)="showData()">showData</button>
+
+   <ion-list>
+  <ion-item ng-repeat="playlist in playlists">
+    {{JSON.stringify(responseData)}}
+  </ion-item>
+</ion-list>
+</ion-content>
