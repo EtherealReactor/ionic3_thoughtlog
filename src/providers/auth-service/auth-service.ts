@@ -3,8 +3,11 @@ import { Http, Headers , RequestOptions } from '@angular/http';
 import { Network } from '@ionic-native/network';
 import 'rxjs/add/operator/map';
 
-let apiURL = 'http://localhost:10010/users/';
-let apiThoughtURL = 'http://localhost:10010/thoughts?page=1&limit=10&user_id=5a0c7aadf9ba395dfb4e8bdb';
+let apiURL = 'http://107.23.234.81:10010/users/'
+
+//let apiURL = 'http://localhost:10010/users/';
+let apiThoughtURL = 'http://107.23.234.81:10010/thoughts?page=1&limit=10&user_id=5a0c7aadf9ba395dfb4e8bdb';
+//let apiThoughtURL = 'http://localhost:10010/thoughts?page=1&limit=10';
 
 @Injectable()
 export class AuthServiceProvider {

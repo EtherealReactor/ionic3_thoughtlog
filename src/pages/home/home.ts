@@ -9,6 +9,8 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 export class HomePage {
   userDetails: any;
   responseData: any;
+  thoughtArray: any;
+  thoughtData= {"thought":""}
 
   userPostData = {"_id": "", "token": ""};
 
@@ -32,12 +34,17 @@ showData(){
         console.log(result)
         // Hide the loader.
         //loader.dismiss();
-        console.log(this.responseData.thoughts);
+        console.log(this.responseData);
+        
         if(!this.responseData.thoughts){
           console.log('token not present')
+          this.thoughtArray= this.responseData.thoughts
+          console.log('llllllllllllllll')
         } else {
-          localStorage.setItem('thoughts', JSON.stringify(this.responseData));
-          console.log('hhhhhhhhhhhhhhh  ' + this.responseData)
+        this.thoughtArray= this.responseData.thoughts
+          localStorage.setItem('thoughts', this.responseData);
+          console.log('mmmmmmm  ' + this.thoughtArray)
+
           //this.navCtrl.push(TabsPage);
         }
       }, (err) => {
@@ -55,6 +62,10 @@ showData(){
   logout(){
      localStorage.clear();
      setTimeout(() => this.backToWelcome(), 1000);
+  }
+
+  saveThought(){
+  console.log('aaaaaaaaaaaa');
   }
 
 }

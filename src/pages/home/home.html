@@ -8,12 +8,27 @@
   <h2>Welcome to Ionic!</h2>
   <h2>Welcome to {{userDetails.name}}</h2>
   <h3>Email: {{userDetails.email}}</h3>
+
+
+
+  <ion-item>
+      <ion-label floating>Thought</ion-label>\
+      <ion-input type="description" [(ngModel)]="thoughtData.description"></ion-input>
+      <button ion-button color="primary" (click)="saveThought()">save Thought</button>
+    </ion-item>
+    <button ion-button color="primary" (click)="saveThought()">save Thought</button>
   <button ion-button color="primary" (click)="logout()">Logout</button>
    <button ion-button color="primary" (click)="showData()">showData</button>
 
    <ion-list>
+  <ion-item *ngFor="let thought of thoughtArray ">
+    {{(thought.description)}}
+  </ion-item>
+</ion-list>
+
+<ion-list>
   <ion-item ng-repeat="playlist in playlists">
-    {{JSON.stringify(responseData)}}
+    {{(responseData)}}
   </ion-item>
 </ion-list>
 </ion-content>
