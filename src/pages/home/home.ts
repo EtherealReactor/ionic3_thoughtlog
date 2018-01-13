@@ -66,6 +66,14 @@ showData(){
 
   saveThought(){
   console.log('aaaaaaaaaaaa');
+   this.authService.saveThoughts(this.thoughtData).then((result) => {
+   this.responseData = result;
+   console.log(this.responseData);
+   }, (err) => {
+        //loader.dismiss();
+        console.log(err);
+    });
+
   }
 
 }
