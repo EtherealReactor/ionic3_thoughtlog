@@ -6,8 +6,8 @@ import 'rxjs/add/operator/map';
 let apiURL = 'http://107.23.234.81:10010/users/'
 
 //let apiURL = 'http://localhost:10010/users/';
-let apiThoughtURL = 'http://107.23.234.81:10010/thoughts?page=1&limit=10&user_id=5a0c7aadf9ba395dfb4e8bdb';
-//let apiThoughtURL = 'http://localhost:10010/thoughts?page=1&limit=10';
+//let apiThoughtURL = 'http://107.23.234.81:10010/thoughts?page=1&limit=10&user_id=5a0c7aadf9ba395dfb4e8bdb';
+let apiThoughtURL = 'http://localhost:10010/thoughts?page=1&limit=10';
 
 @Injectable()
 export class AuthServiceProvider {
@@ -63,4 +63,27 @@ export class AuthServiceProvider {
     });
 
   }
+
+
+  saveThoughts(thoughtData){
+    return new Promise((resolve, reject) => {
+      //let options = new Headers();
+      let headers = new Headers() //{ 'Content-Type': 'application/json' });
+      headers.append('Content-Type', 'application/x-www-form-urlencoded');
+      headers.append('Accept', 'application/json');
+      headers.append('Authorization',  userDetails.token);
+      let options = new RequestOptions({ headers: headers });
+      
+      this.http.post(apiThoughtURL , options).
+      subscribe(res => {
+      console.log(res.json());
+        resolve(res.json());
+      }, (err) => {
+      console.log(err);
+        reject(err);
+      });
+    });
+
+  }
+
 }
