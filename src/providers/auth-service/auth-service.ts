@@ -71,7 +71,7 @@ export class AuthServiceProvider {
       let headers = new Headers() //{ 'Content-Type': 'application/json' });
       headers.append('Content-Type', 'application/x-www-form-urlencoded');
       headers.append('Accept', 'application/json');
-      headers.append('Authorization',  userDetails.token);
+      headers.append('Authorization',  thoughtData.token);
       let options = new RequestOptions({ headers: headers });
       
       this.http.post(apiThoughtURL , options).
