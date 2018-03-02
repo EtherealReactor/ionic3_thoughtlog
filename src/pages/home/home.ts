@@ -10,8 +10,9 @@ export class HomePage {
   userDetails: any;
   responseData: any;
   thoughtArray: any;
-  thoughtData= {"thought":""}
-
+  page = 0;
+//  thoughtData={};
+thoughtData= {"description": "","status": "published", "category": "self", "tags": []}
   userPostData = {"_id": "", "token": ""};
 
   constructor(public navCtrl: NavController, public authService: AuthServiceProvider,  public app: App) {
@@ -22,14 +23,20 @@ export class HomePage {
     
     this.userPostData._id = this.userDetails._id;
     this.userPostData.token = this.userDetails.token;
+    //this.thoughtData.token = this.userDetails.token;
 
-
+    this.showData(this.page);
 
 
   }
-showData(){
+  
+  ngOnInit(){
+  // this.showData()
+  }
+showData(page){
   console.log('neelmani')
-  this.authService.getThoughts(this.userDetails).then((result) => {
+  this.page = this.page+1;
+  this.authService.getThoughts(this.userDetails,this.page).then((result) => {
         this.responseData = result;
         console.log(result)
         // Hide the loader.
@@ -41,8 +48,8 @@ showData(){
           this.thoughtArray= this.responseData.thoughts
           console.log('llllllllllllllll')
         } else {
-        this.thoughtArray= this.responseData.thoughts
-          localStorage.setItem('thoughts', this.responseData);
+        this.thoughtArray= this.thoughtArray + this.responseData.thoughts
+          localStorage.setItem('thoughts', this.thoughtArray);
           console.log('mmmmmmm  ' + this.thoughtArray)
 
           //this.navCtrl.push(TabsPage);
@@ -56,6 +63,7 @@ showData(){
 }
   backToWelcome() {
    const root = this.app.getRootNav();
+   console.log('kkk : ',root)
    root.popToRoot();
   }
 
@@ -66,7 +74,7 @@ showData(){
 
   saveThought(){
   console.log('aaaaaaaaaaaa');
-   this.authService.saveThoughts(this.thoughtData).then((result) => {
+   this.authService.saveThoughts(this.thoughtData,this.userDetails).then((result) => {
    this.responseData = result;
    console.log(this.responseData);
    }, (err) => {
@@ -74,6 +82,16 @@ showData(){
         console.log(err);
     });
 
+  }
+
+  doInfinite(infiniteScroll) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      this.showData(this.page)
+      console.log('Async operation has ended');
+      infiniteScroll.enable(false);
+    }, 5000);
   }
 
 }

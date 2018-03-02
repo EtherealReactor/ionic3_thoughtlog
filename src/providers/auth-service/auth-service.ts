@@ -3,11 +3,11 @@ import { Http, Headers , RequestOptions } from '@angular/http';
 import { Network } from '@ionic-native/network';
 import 'rxjs/add/operator/map';
 
-let apiURL = 'http://107.23.234.81:10010/users/'
+let apiURL = 'http://54.242.138.23/api/users/'
 
 //let apiURL = 'http://localhost:10010/users/';
 //let apiThoughtURL = 'http://107.23.234.81:10010/thoughts?page=1&limit=10&user_id=5a0c7aadf9ba395dfb4e8bdb';
-let apiThoughtURL = 'http://localhost:10010/thoughts?page=1&limit=10';
+let apiThoughtURL = 'http://54.242.138.23/api/thoughts';
 
 @Injectable()
 export class AuthServiceProvider {
@@ -43,7 +43,7 @@ export class AuthServiceProvider {
     });
   }
 
-  getThoughts(userDetails){
+  getThoughts(userDetails,page){
     return new Promise((resolve, reject) => {
       //let options = new Headers();
       let headers = new Headers() //{ 'Content-Type': 'application/json' });
@@ -52,7 +52,7 @@ export class AuthServiceProvider {
       headers.append('Authorization',  userDetails.token);
       let options = new RequestOptions({ headers: headers });
       
-      this.http.get(apiThoughtURL , options).
+      this.http.get(apiThoughtURL +'?page='+page , options).
       subscribe(res => {
       console.log(res.json());
         resolve(res.json());
@@ -65,16 +65,17 @@ export class AuthServiceProvider {
   }
 
 
-  saveThoughts(thoughtData){
+  saveThoughts(thoughtData,userDetail){
     return new Promise((resolve, reject) => {
       //let options = new Headers();
       let headers = new Headers() //{ 'Content-Type': 'application/json' });
       headers.append('Content-Type', 'application/x-www-form-urlencoded');
       headers.append('Accept', 'application/json');
-      headers.append('Authorization',  thoughtData.token);
+      headers.append('Authorization',  userDetail.token);
       let options = new RequestOptions({ headers: headers });
-      
-      this.http.post(apiThoughtURL , options).
+      console.log(apiThoughtURL)
+      console.log(thoughtData)
+      this.http.post(apiThoughtURL , JSON.stringify(thoughtData),options).
       subscribe(res => {
       console.log(res.json());
         resolve(res.json());
