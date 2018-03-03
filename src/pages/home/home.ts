@@ -55,6 +55,7 @@ showData(page){
                         this.thoughtArray.push(this.responseData.thoughts[i]);
                     }
                   //  console.log('lllll ' + this.thoughtArray1)
+                  //infiniteScroll.enable(true);
           //this.navCtrl.push(TabsPage);
         }
       }, (err) => {
@@ -89,11 +90,11 @@ showData(page){
 
   doInfinite(infiniteScroll) {
     console.log('Begin async operation');
-
+    //infiniteScroll.enable(false);
     setTimeout(() => {
       this.showData(this.page)
       console.log('Async operation has ended');
-      infiniteScroll.enable(false);
+       infiniteScroll.complete();
     }, 5000);
   }
 
