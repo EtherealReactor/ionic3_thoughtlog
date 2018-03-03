@@ -16,9 +16,11 @@
    <button ion-button color="primary" (click)="showData()">refresh data</button>
 
    <ion-list>
+   <ion-card>
   <ion-item *ngFor="let thought of thoughtArray ">
     {{(thought.description)}}
   </ion-item>
+  </ion-card>
 </ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
