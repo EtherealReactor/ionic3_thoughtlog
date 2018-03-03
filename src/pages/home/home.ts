@@ -10,6 +10,7 @@ export class HomePage {
   userDetails: any;
   responseData: any;
   thoughtArray: any;
+  thoughtArray1: any;
   page = 0;
 //  thoughtData={};
 thoughtData= {"description": "","status": "published", "category": "self", "tags": []}
@@ -20,7 +21,8 @@ thoughtData= {"description": "","status": "published", "category": "self", "tags
     const data = JSON.parse(localStorage.getItem('userData'));
     console.log(data);
     this.userDetails = data;
-    
+    this.thoughtArray=[];
+    this.thoughtArray1=[];
     this.userPostData._id = this.userDetails._id;
     this.userPostData.token = this.userDetails.token;
     //this.thoughtData.token = this.userDetails.token;
@@ -45,13 +47,14 @@ showData(page){
         
         if(!this.responseData.thoughts){
           console.log('token not present')
-          this.thoughtArray= this.responseData.thoughts
-          console.log('llllllllllllllll')
+          
         } else {
-        this.thoughtArray= this.thoughtArray + this.responseData.thoughts
-          localStorage.setItem('thoughts', this.thoughtArray);
-          console.log('mmmmmmm  ' + this.thoughtArray)
-
+          console.log('mmmmmmm  ' + this.responseData.thoughts.length)
+          for (var i = 0; i < this.responseData.thoughts.length; i++) {
+                        //console.log('aaaa ' + this.responseData.thoughts[i].description)
+                        this.thoughtArray.push(this.responseData.thoughts[i]);
+                    }
+                  //  console.log('lllll ' + this.thoughtArray1)
           //this.navCtrl.push(TabsPage);
         }
       }, (err) => {
